@@ -1,8 +1,11 @@
 let express = require("express");
+let bodyParser = require("body-parser");
 require("dotenv").config();
 let app = express();
 
 console.log("Hello World");
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.path} - ${req.ip}`);
@@ -46,5 +49,7 @@ app.get("/name", (req, res) => {
 
   res.json({ name: `${firstName} ${lastName}` });
 });
+
+app.use(bodyParser.json());
 
 module.exports = app;
